@@ -95,8 +95,12 @@ router.get('/me', authenticate, (req: AuthRequest, res: Response) => {
   return res.json({ user });
 });
 
-function generateToken(payload: object) {
-  return jwt.sign(payload, process.env.JWT_SECRET || 'fallback-secret', { expiresIn: '24h' });
+function generateToken(payload: object): string {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('JWT_SECRET environment variable is not set');
+  }
+  return jwt.sign(payload, secret, { expiresIn: '24h' });
 }
 
 export default router;

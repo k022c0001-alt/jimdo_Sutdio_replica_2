@@ -37,7 +37,7 @@ export default function FrontOfficePage() {
       setCustomers(cRes.data.customers);
       setDeals(dRes.data.deals);
       setPipeline(pRes.data.pipeline);
-    } catch { }
+    } catch (err) { console.error(err); }
   }
 
   async function addCustomer() {

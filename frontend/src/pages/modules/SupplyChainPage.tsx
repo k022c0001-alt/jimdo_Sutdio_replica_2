@@ -26,7 +26,7 @@ export default function SupplyChainPage() {
       setItems(iRes.data.items);
       setStats(sRes.data);
       setLowStock(lRes.data.items);
-    } catch { }
+    } catch (err) { console.error(err); }
   }
 
   async function addItem() {
@@ -52,7 +52,7 @@ export default function SupplyChainPage() {
       await supplyChainApi.deleteItem(id);
       toast.success('Item deleted');
       loadData();
-    } catch { }
+    } catch (err) { console.error(err); }
   }
 
   const filtered = items.filter(i => !search || i.name.toLowerCase().includes(search.toLowerCase()) || (i.sku || '').toLowerCase().includes(search.toLowerCase()));

@@ -1,8 +1,10 @@
 import { create } from 'zustand';
 import { Page, PageComponent, ComponentType } from '../types';
 
-// We define uuid inline to avoid needing uuid package in frontend
 function genId() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
 

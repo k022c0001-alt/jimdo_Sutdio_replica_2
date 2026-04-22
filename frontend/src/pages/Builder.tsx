@@ -18,7 +18,7 @@ export default function Builder() {
   useEffect(() => {
     pagesApi.list().then(res => {
       setPages(res.data.pages || []);
-    }).catch(() => {});
+    }).catch((err) => console.error('Failed to load pages:', err));
   }, []);
 
   useEffect(() => {

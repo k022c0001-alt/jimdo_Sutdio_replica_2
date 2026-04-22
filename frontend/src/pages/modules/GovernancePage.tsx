@@ -24,7 +24,7 @@ export default function GovernancePage() {
       setUsers(uRes.data.users);
       setAuditLogs(aRes.data.logs);
       setEsg(eRes.data.metrics);
-    } catch { }
+    } catch (err) { console.error(err); }
   }
 
   async function changeRole(userId: string, role: string) {

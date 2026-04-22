@@ -25,7 +25,7 @@ export default function OperationsPage() {
       ]);
       setTasks(tRes.data.tasks);
       setStats(sRes.data);
-    } catch { }
+    } catch (err) { console.error(err); }
   }
 
   async function addTask() {
@@ -43,7 +43,7 @@ export default function OperationsPage() {
     try {
       await operationsApi.updateTask(task.id, { status: newStatus });
       setTasks(tasks.map(t => t.id === task.id ? { ...t, status: newStatus as any } : t));
-    } catch { }
+    } catch (err) { console.error(err); }
   }
 
   async function deleteTask(id: string) {
@@ -52,7 +52,7 @@ export default function OperationsPage() {
       await operationsApi.deleteTask(id);
       setTasks(tasks.filter(t => t.id !== id));
       toast.success('Deleted');
-    } catch { }
+    } catch (err) { console.error(err); }
   }
 
   return (

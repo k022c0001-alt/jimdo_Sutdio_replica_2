@@ -29,7 +29,7 @@ export default function BackOfficePage() {
       setBudgets(budRes.data.budgets);
       setExpenses(expRes.data.expenses);
       setStats(stRes.data);
-    } catch { }
+    } catch (err) { console.error(err); }
   }
 
   async function addEmployee() {

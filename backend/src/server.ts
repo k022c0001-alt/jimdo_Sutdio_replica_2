@@ -21,8 +21,8 @@ wss.on('connection', (ws: any) => {
           client.send(JSON.stringify(msg));
         }
       });
-    } catch {
-      // ignore malformed messages
+    } catch (err) {
+      console.warn('WebSocket: malformed message ignored', err);
     }
   });
 
