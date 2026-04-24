@@ -14,9 +14,14 @@ import supplychainRoutes from './routes/modules/supplychain';
 import operationsRoutes from './routes/modules/operations';
 import governanceRoutes from './routes/modules/governance';
 import { runMigrations } from './database/migrations';
+import { SqlConnectorPlugin } from './plugins/SqlConnectorPlugin';
+import { pluginManager } from './plugins/PluginManager';
 
 dotenv.config();
 runMigrations();
+
+// プラグイン登録
+pluginManager.register(SqlConnectorPlugin);
 
 const app = express();
 
@@ -35,6 +40,7 @@ app.use(limiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/pages', pagesRoutes);
 app.use('/api/plugins', pluginsRoutes);
+app.use('/api/sql-connector', SqlConnectorPlugin.router);
 app.use('/api/backoffice', backofficeRoutes);
 app.use('/api/frontoffice', frontofficeRoutes);
 app.use('/api/supplychain', supplychainRoutes);
